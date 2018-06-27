@@ -19,9 +19,8 @@ module.exports = function (app) {
         console.log("PASSWORD:"+password);
         var credentials = req.body;
         userModel
-            .findUserByCredentials(credentials)
+            .findUserByName(username)
             .then(function(user) {
-                req.session['currentUser'] = user;
                 res.json(user);
             })
     }
