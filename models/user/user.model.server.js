@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server');
 var userModel = mongoose.model('UserModel', userSchema);
 
-function findUserByCredentials(credentials) {
-  return userModel.findOne(credentials, {username: 1});
+function findUserByCredentials(username,password) {
+  return userModel.findOne({username:username,password:password});
 }
 
 function findUserById(userId) {

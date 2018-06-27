@@ -13,6 +13,10 @@ module.exports = function (app) {
     var adModel = require('../models/ad/ad.model.server');
 
     function register(req, res) {
+        var username = req.body.username;
+        var password = req.body.password;
+        console.log("USERNAME:"+username);
+        console.log("PASSWORD:"+password);
         var credentials = req.body;
         userModel
             .findUserByCredentials(credentials)
@@ -23,16 +27,23 @@ module.exports = function (app) {
     }
 
   function login(req, res) {
+      var username = req.body.username;
+      var password = req.body.password;
+      console.log("USERNAME:"+username);
+      console.log("PASSWORD:"+password);
     var credentials = req.body;
     userModel
-      .findUserByCredentials(credentials)
+      .findUserByCredentials(username,password)
       .then(function(user) {
-        req.session['currentUser'] = user;
+
+          console.log("LOGIN CHECK:"+user);
        if(user==null)
            res.status(500).send({ user: "Invalid User" });
-        else
-          console.log("FROM SERVER:"+user.username);
-          res.send(user);
+        else {
+           req.session['currentUser'] = user;
+           console.log("FROM SERVER:" + user.username);
+           res.send(user);
+       }
       })
   }
 
