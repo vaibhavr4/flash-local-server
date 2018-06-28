@@ -7,6 +7,7 @@ module.exports = function (app) {
     app.get('/api/adscat/:category',findAdByCategory);
     app.post('/api/scrape',scrapedetails);
     app.post('/api/post-ad', createAd);
+    app.put('/api/update-ad',updateAd);
     app.get('/api/user/:userId/content', findAdsForUserid);
     var request = require('request');
     var cheerio = require('cheerio');
@@ -47,6 +48,17 @@ module.exports = function (app) {
             {
                 res.json(ads);
             })
+    }
+
+    function updateAd(req, res) {
+
+        var updatead = req.body;
+        console.log("UPDATE AD:"+JSON.stringify(updatead));
+        return adModel.updateAd(updatead)
+            .then(function (modified_ad) {
+                //req.session['currentUser'] = user;
+                res.json(modified_ad);
+            });
     }
 
     function findAdByCategory(req,res)    {

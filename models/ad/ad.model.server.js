@@ -24,6 +24,11 @@ function deleteAdForUser(userId)
     return adModel.find({seller:userId}).remove().exec();
 }
 
+function updateAd(updatead) {
+    return adModel.updateOne({_id: updatead._id}, updatead);
+}
+
+
 function findAdById(adId) {
     return adModel.findById(adId);
 }
@@ -44,7 +49,8 @@ var api = {
     deleteAdForUser: deleteAdForUser,
     deleteAdById: deleteAdById,
     findAdById: findAdById,
-    findAdByCategory: findAdByCategory
+    findAdByCategory: findAdByCategory,
+    updateAd: updateAd
     // findUserById: findUserById
 };
 
