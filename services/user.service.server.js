@@ -3,6 +3,7 @@ module.exports = function (app) {
   app.get('/api/user/:userId', findUserById);
   app.post('/api/user', createUser);
     app.get('/api/username/:name', findUserByName);
+    app.post('/api/admin-user',createUserByAdmin);
   app.get('/api/profile', profile);
   app.post('/api/logout', logout);
   app.post('/api/login', login);
@@ -95,6 +96,16 @@ module.exports = function (app) {
         res.send(user);
       })
   }
+
+    function createUserByAdmin(req, res) {
+        var user = req.body;
+        userModel.createUser(user)
+            .then(function (user) {
+                //req.session['currentUser'] = user;
+                res.send(user);
+            })
+    }
+
 
   function findAllUsers(req, res) {
     userModel.findAllUsers()
