@@ -42,7 +42,7 @@ module.exports = function (app) {
     {
 
         var id = req.params['adId'];
-        console.log("In server del ad"+id);
+        //console.log("In server del ad"+id);
         adModel.deleteAdById(id)
             .then(function(ads)
             {
@@ -53,7 +53,7 @@ module.exports = function (app) {
     function updateAd(req, res) {
 
         var updatead = req.body;
-        console.log("UPDATE AD:"+JSON.stringify(updatead));
+        //console.log("UPDATE AD:"+JSON.stringify(updatead));
         return adModel.updateAd(updatead)
             .then(function (modified_ad) {
                 //req.session['currentUser'] = user;
@@ -64,18 +64,18 @@ module.exports = function (app) {
     function findAdByCategory(req,res)    {
 
         var category = req.params['category'];
-        console.log("In server get ad by category"+category);
+        //console.log("In server get ad by category"+category);
         adModel.findAdByCategory(category)
             .then(function(ads)
             {
-                console.log("ADS RETURNED FOR CATEGORY"+JSON.stringify(ads));
+                //console.log("ADS RETURNED FOR CATEGORY"+JSON.stringify(ads));
                 res.json(ads);
             })
     }
     function findAdById(req,res)    {
 
         var id = req.params['adId'];
-        console.log("In server get ad"+id);
+        //console.log("In server get ad"+id);
         adModel.findAdById(id)
             .then(function(ads)
             {
@@ -97,7 +97,7 @@ module.exports = function (app) {
 
         var currentUser = req.session.currentUser;
         var userId = currentUser._id;
-        console.log("In user ad server"+userId);
+        //console.log("In user ad server"+userId);
         adModel
             .findAdsForUser(userId)
             .then(function (ads) {

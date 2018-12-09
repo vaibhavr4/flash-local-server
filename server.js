@@ -73,6 +73,8 @@ var searchService = require('./services/search.service.server');
 searchService(app);
 var adService = require('./services/ad.service.server');
 adService(app);
+var messageService = require('./services/message.service.server');
+messageService(app);
 
 app.listen(4000);
 exports = module.exports = app;
